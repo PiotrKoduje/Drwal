@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Change format</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #fdfbfb, #ebedee);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      .card {
+        background: white;
+        padding: 30px 25px;
+        border-radius: 14px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        width: 520px;
+        text-align: center;
+      }
+
+      input {
+        width: 100%;
+        padding: 14px;
+        font-size: 18px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        outline: none;
+        text-align: center;
+        transition: border 0.2s, box-shadow 0.2s;
+      }
+
+      input:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+      }
+
+      button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+        font-weight: 600;
+        color: white;
+        background: #667eea;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
+      }
+
+      button:hover {
+        background: #5a6fe0;
+      }
+
+      button:active {
+        transform: scale(0.98);
+      }
+
+      .hint {
+        margin-top: 12px;
+        font-size: 13px;
+        color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <input
+        type="text"
+        id="text"
+        placeholder="tu wklej treść"
+        autocomplete="off"
+      />
+      <button onclick="getChangedText()">Pobierz</button>
+    </div>
+
+    <script>
+      function getChangedText() {
+        const input = document.getElementById("text");
+        const startValue = input.value.trim();
+
+        if (!startValue) return;
+
+        const result = startValue.replace(/ /g, "-");
+
+        navigator.clipboard.writeText(result);
+
+        input.value = "";
+        input.focus();
+      }
+    </script>
+  </body>
+</html>
