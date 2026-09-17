@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,12 +15,17 @@
         align-items: center;
         justify-content: center;
         background: linear-gradient(135deg, #fdfbfb, #ebedee);
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
       }
 
       .card {
         background: white;
         padding: 30px 25px;
+        margin: 15px;
         border-radius: 14px;
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         width: 520px;
@@ -35,7 +40,9 @@
         border: 1px solid #ddd;
         outline: none;
         text-align: center;
-        transition: border 0.2s, box-shadow 0.2s;
+        transition:
+          border 0.2s,
+          box-shadow 0.2s;
       }
 
       input:focus {
@@ -54,7 +61,9 @@
         border: none;
         border-radius: 10px;
         cursor: pointer;
-        transition: background 0.2s, transform 0.1s;
+        transition:
+          background 0.2s,
+          transform 0.1s;
       }
 
       button:hover {
@@ -70,22 +79,42 @@
         font-size: 13px;
         color: #777;
       }
+
+      header {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
     </style>
   </head>
   <body>
-    <div class="card">
-      <input
-        type="text"
-        id="text"
-        placeholder="tu wklej treść"
-        autocomplete="off"
-      />
-      <button onclick="getChangedText()">Pobierz</button>
+    <div class="container">
+      <div class="card">
+        <header>Zmień spacje na myśliniki</header>
+        <input
+          type="text"
+          id="undashedText"
+          placeholder="tu wklej treść"
+          autocomplete="off"
+        />
+        <button onclick="getChangedText()">Pobierz</button>
+      </div>
+
+      <div class="card">
+        <header>Usuń spacje</header>
+        <input
+          type="text"
+          id="spacedText"
+          placeholder="tu wklej treść"
+          autocomplete="off"
+        />
+        <button onclick="getUnspacedText()">Pobierz</button>
+      </div>
     </div>
 
     <script>
       function getChangedText() {
-        const input = document.getElementById("text");
+        const input = document.getElementById("undashedText");
         const startValue = input.value.trim();
 
         if (!startValue) return;
@@ -96,6 +125,21 @@
 
         input.value = "";
         input.focus();
+        console.log("works");
+      }
+
+      function getUnspacedText() {
+        const input = document.getElementById("spacedText");
+        const startValue = input && input.value ? input.value.trim() : "";
+        if (!startValue) return;
+
+        const result = startValue.replace(/\s+/g, "");
+
+        navigator.clipboard.writeText(result);
+
+        input.value = "";
+        input.focus();
+        console.log("works");
       }
     </script>
   </body>
